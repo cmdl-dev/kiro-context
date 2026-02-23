@@ -19,7 +19,7 @@ It includes a script that:
 Run the script with a package specifier (`name@version`) and a clear question:
 
 ```bash
-node scripts/query-package-context.mjs --question "How do I invalidate a query after mutation?" --package "@tanstack/react-query@5.90.5"
+node kiro-context/scripts/query-package-context.mjs --question "How do I invalidate a query after mutation?" --package "@tanstack/react-query@5.90.5"
 ```
 
 Optional:
@@ -29,7 +29,7 @@ Optional:
 Example with a custom cache directory:
 
 ```bash
-node scripts/query-package-context.mjs --question "How can I implement pagination with useInfiniteQuery?" --package "@tanstack/react-query@5.90.5" --cache-dir "./tmp/package-cache"
+node kiro-context/scripts/query-package-context.mjs --question "How can I implement pagination with useInfiniteQuery?" --package "@tanstack/react-query@5.90.5" --cache-dir "./tmp/package-cache"
 ```
 
 ## How package resolution works
@@ -40,4 +40,4 @@ If the target cache directory already exists but is not a valid git clone, it is
 
 ## Included skill definition
 
-`SKILL.md` describes this workflow as a reusable Kiro skill (`kiro-context`) and provides prompt guidance for package questions.
+`kiro-context/SKILL.md` defines this as a reusable skill (`kiro-context`) and `kiro-context/scripts/query-package-context.mjs` is the bundled runtime script.
