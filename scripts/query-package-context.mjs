@@ -13,6 +13,9 @@ const { values } = parseArgs({
 
 if (!values.package || !values.question) {
   console.error("Error: --question and --package are required");
+  console.error(
+    "Usage: node scripts/query-package-context.mjs --package \"name@version\" --question \"your question\" [--cache-dir ./path]",
+  );
   process.exit(1);
 }
 
@@ -67,6 +70,10 @@ function normalizeRepositoryUrl(repository) {
     url = `https://${url.slice("git://".length)}`;
   }
 
+  if (url.endsWith(".git")) {
+    return url;
+  }
+
   return url;
 }
 
@@ -117,10 +124,10 @@ if (!existsSync(join(packageDir, ".git"))) {
 
 const systemPrompt = [
   "---SystemPrompt---",
-  "You are an agent to help me answer the following question.",
+  "You are an agent helping answer the following package question.",
   "",
-  `This is the codebase of the package ${pkg}. be sure to check if \"examples\" directory exist in this codebase.`,
-  "If examples exists that is a good resources to find your answer",
+  `This repository is the source code for ${pkg}. Check whether an \"examples\" directory exists and use it when relevant.`,
+  "Use repository code and examples as primary evidence.",
   "Only give me the answer and nothing else.",
   "---",
   "QUESTION:",
